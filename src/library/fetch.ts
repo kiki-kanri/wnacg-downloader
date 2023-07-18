@@ -1,3 +1,5 @@
+import fetch from 'node-fetch-commonjs';
+
 import { Dict } from '@/typing';
 
 export const useGet = async (url: string, referer?: string) => {
