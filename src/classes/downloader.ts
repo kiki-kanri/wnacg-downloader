@@ -1,4 +1,5 @@
 import { load } from 'cheerio';
+import { Presets, SingleBar } from 'cli-progress';
 import { mkdirs, writeFile } from 'fs-extra';
 import logger from 'node-color-log';
 import { Response } from 'node-fetch-commonjs';
@@ -6,6 +7,8 @@ import { Response } from 'node-fetch-commonjs';
 import { useGet } from '@/library/fetch';
 import paths, { join } from '@/library/paths';
 import { sleep } from 'sleep-ts';
+
+const progressBar = new SingleBar({}, Presets.shades_classic);
 
 export default class Downloader {
 	private aid: string;
@@ -33,6 +36,7 @@ export default class Downloader {
 		const imageUrl = root('#picarea').attr('src');
 		if (imageUrl) await this.downloadImage(index, imageUrl);
 		this.downloadingCount--;
+		progressBar.increment();
 	}
 
 	private async getAllImagePageUrls(pageCount: number) {
@@ -71,8 +75,10 @@ export default class Downloader {
 	private async processAllImagePages(allImagePageUrls: string[]) {
 		const numberOfDigits = allImagePageUrls.length.toString().length;
 		const baseIndex = '0'.repeat(numberOfDigits);
+		progressBar.start(allImagePageUrls.length, 0);
 		const promises = allImagePageUrls.map(async (url, index) => this.downloadImagePage(`${baseIndex}${index + 1}`.slice(-numberOfDigits), url));
 		await Promise.all(promises);
+		progressBar.stop();
 	}
 
 	async start() {
@@ -82,7 +88,7 @@ export default class Downloader {
 		this.bookDirPath = join(paths.books, info.title);
 		await mkdirs(this.bookDirPath);
 		const allImagePageUrls = await this.getAllImagePageUrls(info.pageCount);
-		logger.info(`Images count ${allImagePageUrls.length}`);
+		logger.info(`Images count ${allImagePageUrls.length}.`);
 		await this.processAllImagePages(allImagePageUrls);
 		logger.success(`Success download ${info.title}`);
 	}
