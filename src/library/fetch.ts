@@ -1,9 +1,7 @@
 import fetch from 'node-fetch-commonjs';
 
-import { Dict } from '@/typing';
-
 export const useGet = async (url: string, referer?: string) => {
-	const headers: Dict<string> = {
+	const headers: Record<string, string> = {
 		'accept-encoding': 'gzip, deflate, br',
 		'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
 		'cache-control': 'no-cache',
