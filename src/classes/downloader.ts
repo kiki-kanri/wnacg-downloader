@@ -1,6 +1,6 @@
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
-import { mkdirs, writeFile } from 'fs-extra';
+import { mkdirs, readdir, writeFile } from 'fs-extra';
 import logger from 'node-color-log';
 import { Response } from 'node-fetch-commonjs';
 
@@ -21,9 +21,15 @@ export default class Downloader {
 		this.aid = aid;
 	}
 
+	private async checkDownloadedImages(targetFilesCount: number) {
+		const images = await readdir(this.bookDirPath);
+		return images.length !== targetFilesCount;
+	}
+
 	private async downloadImage(index: string, url: string) {
 		if (url.startsWith('//')) url = `https:${url}`;
 		const response = await useGet(url);
+		if (response.status !== 200) return logger.error(`Get image ${url} error!`);
 		const savePath = this.getImageSavePath(index, response, url);
 		await writeFile(savePath, Buffer.from(await response.arrayBuffer()));
 	}
@@ -90,6 +96,7 @@ export default class Downloader {
 		const allImagePageUrls = await this.getAllImagePageUrls(info.pageCount);
 		logger.info(`Images count ${allImagePageUrls.length}.`);
 		await this.processAllImagePages(allImagePageUrls);
-		logger.success(`Success download ${info.title}`);
+		if (await this.checkDownloadedImages(allImagePageUrls.length)) return logger.success(`Success download ${info.title}`);
+		logger.error(`${info.title} images count not correct!`);
 	}
 }
