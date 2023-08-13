@@ -24,7 +24,7 @@ export default class Downloader {
 
 	private async checkDownloadedImages(targetFilesCount: number) {
 		const images = await readdir(this.bookDirPath);
-		return images.length !== targetFilesCount;
+		return images.length === targetFilesCount;
 	}
 
 	private async downloadImage(index: string, url: string) {
