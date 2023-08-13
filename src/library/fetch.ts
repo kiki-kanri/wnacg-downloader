@@ -1,4 +1,4 @@
-import fetch from 'node-fetch-commonjs';
+import fetch from 'node-fetch';
 
 export const useGet = async (url: string, referer?: string) => {
 	const headers: Record<string, string> = {

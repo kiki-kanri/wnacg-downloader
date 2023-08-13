@@ -21,4 +21,4 @@ async function main() {
 	}
 }
 
-(async () => require.main === module && await main())();
+(async () => await main())();

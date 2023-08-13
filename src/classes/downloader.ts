@@ -1,8 +1,9 @@
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
-import { mkdirs, readdir, writeFile } from 'fs-extra';
+import { readdir, writeFile } from 'fs/promises';
+import { mkdirs } from 'fs-extra';
 import logger from 'node-color-log';
-import { Response } from 'node-fetch-commonjs';
+import { Response } from 'node-fetch';
 
 import { useGet } from '@/library/fetch';
 import paths, { join } from '@/library/paths';
