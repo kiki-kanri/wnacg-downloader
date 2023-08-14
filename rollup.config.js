@@ -31,7 +31,7 @@ export default defineConfig({
 		}),
 		externals(),
 		resolve({ extensions: ['.js', '.json', '.mjs', '.node', '.ts'] }),
-		strip({ include: ['**/*.ts'] }),
+		strip({ include: ['./src/**/*'] }),
 		typescriptPaths({ preserveExtensions: true })
 	]
 });
