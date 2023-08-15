@@ -14,7 +14,7 @@ const progressBar = new SingleBar({}, Presets.shades_classic);
 export default class Downloader {
 	private aid: string;
 	private bookDirPath!: string;
-	private downloadingCount = 0;
+	private downloadingCount: number = 0;
 
 	constructor(aidOrUrl: string) {
 		const aid = aidOrUrl.match(/(aid-)?(\d+)/)?.[2];
