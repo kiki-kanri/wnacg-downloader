@@ -1,5 +1,6 @@
 {
   "license": "MIT",
+  "author": "kiki-kanri",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
