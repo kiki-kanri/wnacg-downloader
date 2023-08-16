@@ -8,12 +8,11 @@
   },
   "devDependencies": {
     "@esbuild-kit/esm-loader": "^2.5.5",
-    "@rollup/plugin-commonjs": "^25.0.4",
-    "@rollup/plugin-node-resolve": "^15.1.0",
     "@rollup/plugin-strip": "^3.0.2",
     "@types/cli-progress": "^3.11.0",
     "@types/fs-extra": "^11.0.1",
     "@types/inquirer": "^9.0.3",
+    "@types/node": "^20.5.0",
     "nodemon": "^3.0.1",
     "rollup": "^3.28.0",
     "rollup-plugin-esbuild": "^5.0.0",
