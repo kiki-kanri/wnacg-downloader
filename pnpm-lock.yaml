@@ -58,9 +58,9 @@ devDependencies:
   rollup-plugin-node-externals:
     specifier: ^6.1.1
     version: 6.1.1(rollup@3.28.0)
-  rollup-plugin-typescript-paths:
-    specifier: ^1.4.0
-    version: 1.4.0(typescript@5.1.6)
+  rollup-plugin-tsconfig-paths:
+    specifier: ^1.5.1
+    version: 1.5.1(rollup@3.28.0)(typescript@5.1.6)
   typescript:
     specifier: ^5.1.6
     version: 5.1.6
@@ -690,7 +690,7 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /cli-cursor@3.1.0:
@@ -944,8 +944,8 @@ packages:
       universalify: 2.0.0
     dev: false
 
-  /fsevents@2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
@@ -1295,12 +1295,15 @@ packages:
       rollup: 3.28.0
     dev: true
 
-  /rollup-plugin-typescript-paths@1.4.0(typescript@5.1.6):
-    resolution: {integrity: sha512-6EgeLRjTVmymftEyCuYu91XzY5XMB5lR0YrJkeT0D7OG2RGSdbNL+C/hfPIdc/sjMa9Sl5NLsxIr6C/+/5EUpA==}
+  /rollup-plugin-tsconfig-paths@1.5.1(rollup@3.28.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-HhqSvheeEdSQY/X1gMj7MBccx9BE4FbzIaCrRpOqNc9OwvbqbTf1WOUY56bGW4nJ3OWLOuzaBFJFle9LeRmXIg==}
     peerDependencies:
-      typescript: '>=3.4'
+      rollup: ^2 || ^3
     dependencies:
-      typescript: 5.1.6
+      rollup: 3.28.0
+      typescript-paths: 1.5.1(typescript@5.1.6)
+    transitivePeerDependencies:
+      - typescript
     dev: true
 
   /rollup@3.28.0:
@@ -1308,7 +1311,7 @@ packages:
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: 2.3.3
     dev: true
 
   /run-async@3.0.0:
@@ -1431,6 +1434,14 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
     dev: false
+
+  /typescript-paths@1.5.1(typescript@5.1.6):
+    resolution: {integrity: sha512-lYErSLCON2MSplVV5V/LBgD4UNjMgY3guATdFCZY2q1Nr6OZEu4q6zX/rYMsG1TaWqqQSszg6C9EU7AGWMDrIw==}
+    peerDependencies:
+      typescript: ^4.7.2 || ^5
+    dependencies:
+      typescript: 5.1.6
+    dev: true
 
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}

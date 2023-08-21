@@ -3,7 +3,7 @@ import path from 'path';
 import { defineConfig } from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
 import externals from 'rollup-plugin-node-externals';
-import { typescriptPaths } from 'rollup-plugin-typescript-paths';
+import tsConfigPaths from 'rollup-plugin-tsconfig-paths';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,8 +24,8 @@ export default defineConfig({
 	plugins: [
 		// Must remove debugger statements before other plugins.
 		strip({ include: ['./src/**/*.ts'] }),
+		tsConfigPaths(),
 		esbuild({ minify: true }),
-		externals(),
-		typescriptPaths({ preserveExtensions: true })
+		externals()
 	]
 });
