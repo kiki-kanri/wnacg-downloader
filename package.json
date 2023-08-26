@@ -11,7 +11,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "ts-project-builder -c",
+    "build": "ts-project-builder",
     "dev": "nodemon --exec \"node --loader @esbuild-kit/esm-loader\" ./src/index.ts"
   },
   "dependencies": {
