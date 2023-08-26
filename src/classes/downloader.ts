@@ -2,6 +2,7 @@ import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
 import { readdir, writeFile } from 'fs/promises';
 import { mkdirs } from 'fs-extra';
+import inquirer, { QuestionCollection } from 'inquirer';
 import logger from 'node-color-log';
 import { Response } from 'node-fetch';
 
@@ -10,6 +11,15 @@ import paths, { join } from '@/library/paths';
 import { sleep } from 'sleep-ts';
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
+
+interface PromptAnswers {
+	title: string;
+}
+
+const promptOptions: QuestionCollection<PromptAnswers> = {
+	message: '書名過長，請輸入替代名稱：',
+	name: 'title'
+};
 
 export default class Downloader {
 	private aid: string;
@@ -92,6 +102,11 @@ export default class Downloader {
 		logger.info(`Start download ${this.aid}.`);
 		const info = await this.getInfo();
 		logger.info(`Title：${info.title}`);
+		while (info.title.length > 64) {
+			const answers = await inquirer.prompt(promptOptions);
+			info.title = answers.title.replaceAll(/\/|\.\./gi, '');
+		}
+
 		this.bookDirPath = join(paths.books, info.title);
 		await mkdirs(this.bookDirPath);
 		const allImagePageUrls = await this.getAllImagePageUrls(info.pageCount);
