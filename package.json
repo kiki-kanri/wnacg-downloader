@@ -11,7 +11,7 @@
   },
   "type": "module",
   "scripts": {
-    "build": "rollup -c",
+    "build": "ts-project-builder -c",
     "dev": "nodemon --exec \"node --loader @esbuild-kit/esm-loader\" ./src/index.ts"
   },
   "dependencies": {
@@ -26,16 +26,12 @@
   "devDependencies": {
     "@esbuild-kit/esm-loader": "^2.5.5",
     "@kikiutils/tsconfigs": "^0.1.1",
-    "@rollup/plugin-strip": "^3.0.2",
     "@types/cli-progress": "^3.11.0",
     "@types/fs-extra": "^11.0.1",
     "@types/inquirer": "^9.0.3",
     "@types/node": "^20.5.1",
     "nodemon": "^3.0.1",
-    "rollup": "^3.28.0",
-    "rollup-plugin-esbuild": "^5.0.0",
-    "rollup-plugin-node-externals": "^6.1.1",
-    "rollup-plugin-tsconfig-paths": "^1.5.1",
+    "ts-project-builder": "^0.3.1",
     "typescript": "^5.1.6"
   }
 }
