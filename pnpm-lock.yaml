@@ -31,6 +31,9 @@ devDependencies:
   '@esbuild-kit/esm-loader':
     specifier: ^2.5.5
     version: 2.5.5
+  '@kikiutils/tsconfigs':
+    specifier: ^0.1.1
+    version: 0.1.1
   '@rollup/plugin-strip':
     specifier: ^3.0.2
     version: 3.0.2(rollup@3.28.0)
@@ -479,6 +482,10 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.4.15:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+    dev: true
+
+  /@kikiutils/tsconfigs@0.1.1:
+    resolution: {integrity: sha512-sgl0+le4Owzma7ltzU/aEdIBPP8g7XGwHS/7B1ajt04xbKH6FD0j0BDXInv+jM3dmLyxFDzwbUGa/+1JgxTePw==}
     dev: true
 
   /@ljharb/through@2.3.9:

@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@esbuild-kit/esm-loader": "^2.5.5",
+    "@kikiutils/tsconfigs": "^0.1.1",
     "@rollup/plugin-strip": "^3.0.2",
     "@types/cli-progress": "^3.11.0",
     "@types/fs-extra": "^11.0.1",
