@@ -65,7 +65,7 @@ export default class Downloader {
 	private getImageSavePath(index: string, response: Response, url: string) {
 		const contentType = response.headers.get('content-type');
 		let ext: string = '';
-		if (contentType) ext = contentType.split(';')[0].split('/')[1];
+		if (contentType) ext = contentType.split(';')[0]!.split('/')[1]!;
 		else ext = url.split('.').pop()!;
 		return join(this.bookDirPath, `${index}.${ext}`);
 	}
