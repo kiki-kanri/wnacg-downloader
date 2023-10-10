@@ -1,5 +1,5 @@
 {
-  "extends": "@kikiutils/tsconfigs/esm/esnext.json",
+  "extends": "@kikiutils/tsconfigs/esnext/esnext.json",
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
