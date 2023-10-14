@@ -1,8 +1,7 @@
-import { join, resolve } from 'path';
-export { join } from 'path';
+import { Path } from '@kikiutils/classes';
 
-const root = resolve();
-const books = join(root, 'books');
+const root = Path.resolve();
+const books = root.join('books');
 
 export default {
 	books,

@@ -1,13 +1,12 @@
+import { Path } from '@kikiutils/classes';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
-import { readdir, writeFile } from 'fs/promises';
-import { mkdirs } from 'fs-extra';
 import inquirer, { QuestionCollection } from 'inquirer';
 import logger from 'node-color-log';
 import { Response } from 'node-fetch';
 
 import { useGet } from '@/library/fetch';
-import paths, { join } from '@/library/paths';
+import paths from '@/library/paths';
 import { sleep } from 'sleep-ts';
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
@@ -23,7 +22,7 @@ const promptOptions: QuestionCollection<PromptAnswers> = {
 
 export default class Downloader {
 	#aid: string;
-	#bookDirPath!: string;
+	#bookDirPath!: Path;
 	#downloadingCount: number = 0;
 
 	constructor(aidOrUrl: string) {
@@ -33,8 +32,8 @@ export default class Downloader {
 	}
 
 	async #checkDownloadedImages(targetFilesCount: number) {
-		const images = await readdir(this.#bookDirPath);
-		return images.length === targetFilesCount;
+		const images = await this.#bookDirPath.readdir({ withFileTypes: true });
+		return images?.length === targetFilesCount;
 	}
 
 	async #downloadImage(index: string, url: string) {
@@ -42,7 +41,7 @@ export default class Downloader {
 		const response = await useGet(url);
 		if (response.status !== 200) return logger.error(`Get image ${url} error!`);
 		const savePath = this.#getImageSavePath(index, response, url);
-		await writeFile(savePath, Buffer.from(await response.arrayBuffer()));
+		await savePath.writeFile(Buffer.from(await response.arrayBuffer()));
 	}
 
 	async #downloadImagePage(index: string, pageUrl: string) {
@@ -67,7 +66,7 @@ export default class Downloader {
 		let ext: string = '';
 		if (contentType) ext = contentType.split(';')[0]!.split('/')[1]!;
 		else ext = url.split('.').pop()!;
-		return join(this.#bookDirPath, `${index}.${ext}`);
+		return this.#bookDirPath.join(`${index}.${ext}`);
 	}
 
 	async #getInfo() {
@@ -107,8 +106,8 @@ export default class Downloader {
 			info.title = answers.title.replaceAll(/\/|\.\./gi, '');
 		}
 
-		this.#bookDirPath = join(paths.books, info.title);
-		await mkdirs(this.#bookDirPath);
+		this.#bookDirPath = paths.books.join(info.title);
+		await this.#bookDirPath.mkdirs();
 		const allImagePageUrls = await this.#getAllImagePageUrls(info.pageCount);
 		logger.info(`Images count ${allImagePageUrls.length}.`);
 		await this.#processAllImagePages(allImagePageUrls);
