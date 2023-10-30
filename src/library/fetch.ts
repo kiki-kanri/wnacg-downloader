@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 export const useGet = async (url: string, referrer?: string) => {
 	const headers: Record<string, string> = {
-		'accept-encoding': 'gzip, deflate, br',
+		'accept-encoding': 'gzip',
 		'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
 		'cache-control': 'no-cache',
 		'sec-ch-ua': '"Google Chrome";v="111", "Not(A:Brand";v="8", "Chromium";v="111"',

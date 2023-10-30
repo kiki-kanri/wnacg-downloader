@@ -1,4 +1,5 @@
 import { Path } from '@kikiutils/classes';
+import { sleep } from 'bun';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
 import inquirer, { QuestionCollection } from 'inquirer';
@@ -7,7 +8,6 @@ import { Response } from 'node-fetch';
 
 import { useGet } from '@/library/fetch';
 import paths from '@/library/paths';
-import { sleep } from 'sleep-ts';
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
 
