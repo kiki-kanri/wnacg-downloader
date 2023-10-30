@@ -36,9 +36,9 @@ export default class Downloader {
 		return images?.length === targetFilesCount;
 	}
 
-	async #downloadImage(index: string, url: string) {
+	async #downloadImage(index: string, pageUrl: string, url: string) {
 		if (url.startsWith('//')) url = `https:${url}`;
-		const response = await useGet(url);
+		const response = await useGet(url, pageUrl);
 		if (response.status !== 200) return logger.error(`Get image ${url} error!`);
 		const savePath = this.#getImageSavePath(index, response, url);
 		await savePath.writeFile(Buffer.from(await response.arrayBuffer()));
@@ -47,10 +47,11 @@ export default class Downloader {
 	async #downloadImagePage(index: string, pageUrl: string) {
 		while (this.#downloadingCount > 30) await sleep(50);
 		this.#downloadingCount++;
-		const response = await useGet(`https://wnacg.com${pageUrl}`);
+		const url = `https://wnacg.com${pageUrl}`;
+		const response = await useGet(url);
 		const root = load(await response.text(), {}, true);
 		const imageUrl = root('#picarea').attr('src');
-		if (imageUrl) await this.#downloadImage(index, imageUrl);
+		if (imageUrl) await this.#downloadImage(index, url, imageUrl);
 		this.#downloadingCount--;
 		progressBar.increment();
 	}

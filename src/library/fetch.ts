@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export const useGet = async (url: string, referer?: string) => {
+export const useGet = async (url: string, referrer?: string) => {
 	const headers: Record<string, string> = {
 		'accept-encoding': 'gzip, deflate, br',
 		'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -18,6 +18,5 @@ export const useGet = async (url: string, referer?: string) => {
 		pragma: 'no-cache'
 	}
 
-	if (referer) headers.referer = referer;
-	return await fetch(url, { headers, method: 'GET' });
+	return await fetch(url, { headers, method: 'GET', referrer });
 }
