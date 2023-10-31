@@ -6,4 +6,4 @@ const books = root.join('books');
 export default {
 	books,
 	root
-}
+};

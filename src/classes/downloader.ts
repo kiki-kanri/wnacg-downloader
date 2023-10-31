@@ -78,7 +78,7 @@ export default class Downloader {
 		return {
 			pageCount: parseInt(lastPageHrefEl?.text() || '1'),
 			title: titleEl.text().trim()
-		}
+		};
 	}
 
 	async #getIndexPageImagePageUrls(index: number) {
