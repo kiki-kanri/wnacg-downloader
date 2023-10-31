@@ -19,7 +19,7 @@
     "dev": "bun --watch run ./src/index.ts"
   },
   "dependencies": {
-    "@kikiutils/classes": "^1.2.0",
+    "@kikiutils/classes": "^1.2.1",
     "cheerio": "1.0.0-rc.12",
     "cli-progress": "^3.12.0",
     "date-fns": "^2.30.0",
@@ -32,7 +32,7 @@
     "@types/cli-progress": "^3.11.4",
     "@types/fs-extra": "^11.0.3",
     "@types/inquirer": "^9.0.6",
-    "@types/node": "^20.8.9",
+    "@types/node": "^20.8.10",
     "bun-types": "^1.0.7",
     "typescript": "^5.2.2"
   }
