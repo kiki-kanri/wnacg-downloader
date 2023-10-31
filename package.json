@@ -28,6 +28,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "@kikiutils/prettierrc": "^1.0.4",
     "@kikiutils/tsconfigs": "^1.0.0",
     "@types/cli-progress": "^3.11.4",
     "@types/fs-extra": "^11.0.3",
@@ -35,5 +36,6 @@
     "@types/node": "^20.8.10",
     "bun-types": "^1.0.7",
     "typescript": "^5.2.2"
-  }
+  },
+  "prettier": "@kikiutils/prettierrc"
 }
