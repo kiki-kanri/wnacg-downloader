@@ -1,9 +1,7 @@
+import consola from 'consola';
 import inquirer, { QuestionCollection } from 'inquirer';
-import logger from 'node-color-log';
 
 import Downloader from '@/classes/downloader';
-
-process.setMaxListeners(0);
 
 interface PromptAnswers {
 	aidsOrUrlsString: string;
@@ -25,7 +23,7 @@ async function main() {
 				const downloader = new Downloader(aidOrUrl);
 				await downloader.start();
 			} catch (error) {
-				logger.error(error);
+				consola.error(error);
 			}
 		}
 	}

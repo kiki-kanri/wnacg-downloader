@@ -22,9 +22,9 @@
     "@kikiutils/classes": "^1.2.1",
     "cheerio": "1.0.0-rc.12",
     "cli-progress": "^3.12.0",
+    "consola": "^3.2.3",
     "date-fns": "^2.30.0",
     "inquirer": "^9.2.11",
-    "node-color-log": "^10.0.2",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
