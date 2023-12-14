@@ -16,5 +16,5 @@ export const useGet = async (url: string, referrer?: string) => {
 		pragma: 'no-cache'
 	};
 
-	return await fetch(url, { headers, method: 'GET', referrer });
+	return (await fetch(url, { headers, method: 'GET', referrer })) as Response;
 };
