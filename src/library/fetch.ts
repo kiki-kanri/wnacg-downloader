@@ -1,4 +1,4 @@
-export const useGet = async (url: string, referrer?: string, a?: boolean) => {
+export const useGet = async (url: string, referrer?: string) => {
 	const headers: Record<string, string> = {
 		'accept-encoding': 'gzip',
 		'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
