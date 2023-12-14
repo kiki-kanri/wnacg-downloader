@@ -3,7 +3,8 @@ import { sleep } from 'bun';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
 import consola from 'consola';
-import inquirer, { QuestionCollection } from 'inquirer';
+import inquirer from 'inquirer';
+import type { QuestionCollection } from 'inquirer';
 
 import { useGet } from '@/library/fetch';
 import paths from '@/library/paths';

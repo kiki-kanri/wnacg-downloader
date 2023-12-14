@@ -1,5 +1,6 @@
 import consola from 'consola';
-import inquirer, { QuestionCollection } from 'inquirer';
+import inquirer from 'inquirer';
+import type { QuestionCollection } from 'inquirer';
 
 import Downloader from '@/classes/downloader';
 
