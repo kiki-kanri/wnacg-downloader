@@ -41,7 +41,7 @@ export default class Downloader {
 		const response = await useGet(url, pageUrl);
 		if (response.status !== 200) return consola.error(`Get image ${url} error!`);
 		const savePath = this.#getImageSavePath(index, response, url);
-		await savePath.writeFile(Buffer.from(await response.arrayBuffer()));
+		await Bun.write(savePath.toString(), await response.arrayBuffer());
 	}
 
 	async #downloadImagePage(index: string, pageUrl: string) {
