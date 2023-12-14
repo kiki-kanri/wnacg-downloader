@@ -4,7 +4,6 @@ import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
 import consola from 'consola';
 import inquirer, { QuestionCollection } from 'inquirer';
-import { Response } from 'node-fetch';
 
 import { useGet } from '@/library/fetch';
 import paths from '@/library/paths';
