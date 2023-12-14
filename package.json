@@ -1,16 +1,10 @@
 {
   "private": true,
   "license": "MIT",
-  "author": {
-    "name": "kiki-kanri"
-  },
-  "homepage": "https://github.com/kiki-kanri/wnacg-nh-downloader#readme",
+  "author": "kiki-kanri",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiki-kanri/wnacg-nh-downloader.git"
-  },
-  "bugs": {
-    "url": "https://github.com/kiki-kanri/wnacg-nh-downloader/issues"
   },
   "type": "module",
   "scripts": {
