@@ -26,7 +26,7 @@ export default class Downloader {
 	#downloadingCount: number = 0;
 
 	constructor(aidOrUrl: string) {
-		const aid = aidOrUrl.match(/(aid-)?(\d+)/)?.[2];
+		const aid = (+aidOrUrl).toString() === aidOrUrl ? aidOrUrl : aidOrUrl.match(/aid-(\d+)/)?.[1];
 		if (!aid) throw new Error('Aid or url error');
 		this.#aid = aid;
 	}
