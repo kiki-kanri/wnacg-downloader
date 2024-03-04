@@ -6,8 +6,8 @@ import consola from 'consola';
 import inquirer from 'inquirer';
 import type { QuestionCollection } from 'inquirer';
 
+import paths from '@/constants/paths';
 import { useGet } from '@/library/fetch';
-import paths from '@/library/paths';
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
 
