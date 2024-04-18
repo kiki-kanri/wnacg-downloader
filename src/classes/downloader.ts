@@ -1,4 +1,4 @@
-import { Path } from '@kikiutils/classes';
+import Path from '@kikiutils/classes/path';
 import { sleep } from 'bun';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
@@ -15,10 +15,7 @@ interface PromptAnswers {
 	title: string;
 }
 
-const promptOptions: QuestionCollection<PromptAnswers> = {
-	message: '書名過長，請輸入替代名稱：',
-	name: 'title'
-};
+const promptOptions: QuestionCollection<PromptAnswers> = { message: '書名過長，請輸入替代名稱：', name: 'title' };
 
 export default class Downloader {
 	#aid: string;
@@ -75,10 +72,7 @@ export default class Downloader {
 		const root = load(await response.text(), {}, true);
 		const titleEl = root('h2');
 		const lastPageHrefEl = root('div.f_left.paginator > a').last();
-		return {
-			pageCount: parseInt(lastPageHrefEl?.text() || '1'),
-			title: titleEl.text().trim()
-		};
+		return { pageCount: +(lastPageHrefEl?.text() || 1), title: titleEl.text().trim() };
 	}
 
 	async #getIndexPageImagePageUrls(index: number) {
@@ -91,10 +85,8 @@ export default class Downloader {
 
 	async #processAllImagePages(allImagePageUrls: string[]) {
 		const numberOfDigits = allImagePageUrls.length.toString().length;
-		const baseIndex = '0'.repeat(numberOfDigits);
 		progressBar.start(allImagePageUrls.length, 0);
-		const promises = allImagePageUrls.map(async (url, index) => this.#downloadImagePage(`${baseIndex}${index + 1}`.slice(-numberOfDigits), url));
-		await Promise.all(promises);
+		await Promise.all(allImagePageUrls.map(async (url, index) => this.#downloadImagePage(`${index + 1}`.padStart(numberOfDigits, '0'), url)));
 		progressBar.stop();
 	}
 
@@ -102,7 +94,7 @@ export default class Downloader {
 		consola.info(`Start download ${this.#aid}.`);
 		const info = await this.#getInfo();
 		consola.info(`Title：${info.title}`);
-		while (info.title.length > 64) {
+		while (info.title.length > 96) {
 			const answers = await inquirer.prompt(promptOptions);
 			info.title = answers.title.replaceAll(/\/|\.\./gi, '');
 		}
