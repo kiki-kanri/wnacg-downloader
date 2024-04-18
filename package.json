@@ -14,21 +14,21 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@kikiutils/classes": "^1.3.0",
+    "@kikiutils/classes": "2.0.0-alpha.1",
     "cheerio": "1.0.0-rc.12",
     "cli-progress": "^3.12.0",
     "consola": "^3.2.3",
-    "date-fns": "^3.3.1",
-    "inquirer": "^9.2.15"
+    "date-fns": "^3.6.0",
+    "inquirer": "^9.2.19"
   },
   "devDependencies": {
     "@kikiutils/prettierrc": "^1.3.0",
-    "@kikiutils/tsconfigs": "^2.1.0",
-    "@types/bun": "^1.0.7",
+    "@kikiutils/tsconfigs": "^2.2.0",
+    "@types/bun": "^1.1.0",
     "@types/cli-progress": "^3.11.5",
     "@types/fs-extra": "^11.0.4",
     "@types/inquirer": "^9.0.7",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "prettier": "@kikiutils/prettierrc"
 }
