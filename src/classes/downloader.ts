@@ -1,8 +1,8 @@
 import Path from '@kikiutils/classes/path';
+import logger from '@kikiutils/node/logger';
 import { sleep } from 'bun';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
-import consola from 'consola';
 import inquirer from 'inquirer';
 import type { QuestionCollection } from 'inquirer';
 
@@ -36,7 +36,7 @@ export default class Downloader {
 	async #downloadImage(index: string, pageUrl: string, url: string) {
 		if (url.startsWith('//')) url = `https:${url}`;
 		const response = await useGet(url, pageUrl);
-		if (response.status !== 200) return consola.error(`Get image ${url} error!`);
+		if (response.status !== 200) return logger.error(`Get image ${url} error!`);
 		const savePath = this.#getImageSavePath(index, response, url);
 		await Bun.write(savePath.toString(), await response.arrayBuffer());
 	}
@@ -91,9 +91,9 @@ export default class Downloader {
 	}
 
 	async start() {
-		consola.info(`Start download ${this.#aid}.`);
+		logger.info(`Start download ${this.#aid}.`);
 		const info = await this.#getInfo();
-		consola.info(`Title：${info.title}`);
+		logger.info(`Title：${info.title}`);
 		while (info.title.length > 96) {
 			const answers = await inquirer.prompt(promptOptions);
 			info.title = answers.title.replaceAll(/\/|\.\./gi, '');
@@ -102,9 +102,9 @@ export default class Downloader {
 		this.#bookDirPath = paths.books.join(info.title);
 		await this.#bookDirPath.mkdirs();
 		const allImagePageUrls = await this.#getAllImagePageUrls(info.pageCount);
-		consola.info(`Images count ${allImagePageUrls.length}.`);
+		logger.info(`Images count ${allImagePageUrls.length}.`);
 		await this.#processAllImagePages(allImagePageUrls);
-		if (await this.#checkDownloadedImages(allImagePageUrls.length)) return consola.success(`Success download ${info.title}`);
-		consola.error(`${info.title} images count not correct!`);
+		if (await this.#checkDownloadedImages(allImagePageUrls.length)) return logger.info(`Success download ${info.title}`);
+		logger.error(`${info.title} images count not correct!`);
 	}
 }

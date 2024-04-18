@@ -1,4 +1,4 @@
-import consola from 'consola';
+import logger from '@kikiutils/node/logger';
 import inquirer from 'inquirer';
 import type { QuestionCollection } from 'inquirer';
 
@@ -24,7 +24,7 @@ async function main() {
 				const downloader = new Downloader(aidOrUrl);
 				await downloader.start();
 			} catch (error) {
-				consola.error(error);
+				logger.error(error);
 			}
 		}
 	}

@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@kikiutils/classes": "2.0.0-alpha.1",
+    "@kikiutils/node": "2.0.0-alpha.2",
     "cheerio": "1.0.0-rc.12",
     "cli-progress": "^3.12.0",
-    "consola": "^3.2.3",
     "date-fns": "^3.6.0",
     "inquirer": "^9.2.19"
   },
