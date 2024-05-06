@@ -8,6 +8,7 @@ interface PromptAnswers {
 	aidsOrUrlsString: string;
 }
 
+logger.level = 'info';
 const promptOptions: QuestionCollection<PromptAnswers> = {
 	message: '請輸入網址或aid(多個請用空格分隔)：',
 	name: 'aidsOrUrlsString'
@@ -24,7 +25,7 @@ async function main() {
 				const downloader = new Downloader(aidOrUrl);
 				await downloader.start();
 			} catch (error) {
-				logger.error(error);
+				if (error instanceof Error) logger.error(error.message);
 			}
 		}
 	}
