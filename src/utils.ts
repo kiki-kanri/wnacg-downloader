@@ -1,4 +1,4 @@
-export const useGet = async (url: string, referrer?: string) => {
+export const fetchGet = async (url: string, referrer?: string) => {
 	const headers: Record<string, string> = {
 		'accept-encoding': 'gzip',
 		'accept-language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -16,5 +16,5 @@ export const useGet = async (url: string, referrer?: string) => {
 		pragma: 'no-cache'
 	};
 
-	return (await fetch(url, { headers, method: 'GET', referrer })) as Response;
+	return await fetch(url, { headers, method: 'GET', referrer });
 };

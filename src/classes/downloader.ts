@@ -6,7 +6,7 @@ import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
 
 import paths from '@/constants/paths';
-import { useGet } from '@/library/fetch';
+import { fetchGet } from '@/utils';
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
 
@@ -28,7 +28,7 @@ export default class Downloader {
 
 	async #downloadImage(index: string, pageUrl: string, url: string) {
 		if (url.startsWith('//')) url = `https:${url}`;
-		const response = await useGet(url, pageUrl);
+		const response = await fetchGet(url, pageUrl);
 		if (response.status !== 200) return logger.error(`Get image ${url} error!`);
 		const savePath = this.#getImageSavePath(index, response, url);
 		await Bun.write(savePath.toString(), await response.arrayBuffer());
@@ -38,7 +38,7 @@ export default class Downloader {
 		while (this.#downloadingCount > 30) await sleep(50);
 		this.#downloadingCount++;
 		const url = `https://wnacg.com${pageUrl}`;
-		const response = await useGet(url);
+		const response = await fetchGet(url);
 		const root = load(await response.text(), {}, true);
 		const imageUrl = root('#picarea').attr('src');
 		if (imageUrl) await this.#downloadImage(index, url, imageUrl);
@@ -61,7 +61,7 @@ export default class Downloader {
 	}
 
 	async #getInfo() {
-		const response = await useGet(`https://wnacg.com/photos-index-page-1-aid-${this.#aid}.html`);
+		const response = await fetchGet(`https://wnacg.com/photos-index-page-1-aid-${this.#aid}.html`);
 		const root = load(await response.text(), {}, true);
 		const titleEl = root('h2');
 		const lastPageHrefEl = root('div.f_left.paginator > a').last();
@@ -69,7 +69,7 @@ export default class Downloader {
 	}
 
 	async #getIndexPageImagePageUrls(index: number) {
-		const response = await useGet(`https://wnacg.com/photos-index-page-${index}-aid-${this.#aid}.html`);
+		const response = await fetchGet(`https://wnacg.com/photos-index-page-${index}-aid-${this.#aid}.html`);
 		if (response.status > 400) throw new Error('Get page Error.');
 		const root = load(await response.text(), {}, true);
 		const linkEls = root('div.pic_box.tb a');
