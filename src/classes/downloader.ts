@@ -1,21 +1,14 @@
+import { input } from '@inquirer/prompts';
 import Path from '@kikiutils/classes/path';
 import logger from '@kikiutils/node/logger';
 import { sleep } from 'bun';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
-import inquirer from 'inquirer';
-import type { QuestionCollection } from 'inquirer';
 
 import paths from '@/constants/paths';
 import { useGet } from '@/library/fetch';
 
 const progressBar = new SingleBar({}, Presets.shades_classic);
-
-interface PromptAnswers {
-	title: string;
-}
-
-const promptOptions: QuestionCollection<PromptAnswers> = { message: '書名過長，請輸入替代名稱：', name: 'title' };
 
 export default class Downloader {
 	#aid: string;
@@ -94,11 +87,7 @@ export default class Downloader {
 		logger.info(`Start download ${this.#aid}.`);
 		const info = await this.#getInfo();
 		logger.info(`Title：${info.title}`);
-		while (info.title.length > 96) {
-			const answers = await inquirer.prompt(promptOptions);
-			info.title = answers.title.replaceAll(/\/|\.\./gi, '');
-		}
-
+		while (info.title.length > 96) info.title = (await input({ message: '書名過長，請輸入替代名稱：', required: true })).replaceAll(/\/|\.\./gi, '');
 		this.#bookDirPath = paths.books.join(info.title);
 		await this.#bookDirPath.mkdirs();
 		const allImagePageUrls = await this.#getAllImagePageUrls(info.pageCount);
