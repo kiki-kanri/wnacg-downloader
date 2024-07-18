@@ -83,7 +83,7 @@ export default class Downloader {
 		progressBar.stop();
 	}
 
-	async start() {
+	async run() {
 		logger.info(`開始下載 ${this.#aid}.`);
 		const info = await this.#getInfo();
 		logger.info(`標題：${info.title}`);

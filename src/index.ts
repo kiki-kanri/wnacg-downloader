@@ -8,11 +8,11 @@ async function main() {
 	while (true) {
 		const aidsOrUrlsString = (await input({ message: '請輸入網址或aid(多個請用空格分隔)：', required: true })).trim();
 		const aidsOrUrls = aidsOrUrlsString.split(' ');
-		for (const aidOrUrl of aidsOrUrls) {
-			if (!aidOrUrl.trim()) continue;
+		for (let aidOrUrl of aidsOrUrls) {
+			aidOrUrl = aidOrUrl.trim();
+			if (!aidOrUrl) continue;
 			try {
-				const downloader = new Downloader(aidOrUrl);
-				await downloader.start();
+				await new Downloader(aidOrUrl).run();
 			} catch (error) {
 				logger.error(error);
 			}
