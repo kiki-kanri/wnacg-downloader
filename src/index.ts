@@ -14,8 +14,11 @@ async function main() {
 				const downloader = new Downloader(aidOrUrl);
 				await downloader.start();
 			} catch (error) {
-				if (error instanceof Error) logger.error(error.message);
+				logger.error(error);
 			}
+
+			await Bun.sleep(500);
+			console.log();
 		}
 	}
 }
