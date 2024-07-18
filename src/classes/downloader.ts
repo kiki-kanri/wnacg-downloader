@@ -17,19 +17,19 @@ export default class Downloader {
 
 	constructor(aidOrUrl: string) {
 		const aid = (+aidOrUrl).toString() === aidOrUrl ? aidOrUrl : aidOrUrl.match(/aid-(\d+)/)?.[1];
-		if (!aid) throw new Error('Aid or url error');
+		if (!aid) throw new Error(`錯誤的aid或網址：${aidOrUrl}`);
 		this.#aid = aid;
 	}
 
 	async #checkDownloadedImages(targetFilesCount: number) {
-		const images = await this.#bookDirPath.readdir({ withFileTypes: true });
+		const images = await this.#bookDirPath.readdir();
 		return images?.length === targetFilesCount;
 	}
 
 	async #downloadImage(index: string, pageUrl: string, url: string) {
 		if (url.startsWith('//')) url = `https:${url}`;
 		const response = await fetchGet(url, pageUrl);
-		if (response.status !== 200) return logger.error(`Get image ${url} error!`);
+		if (response.status !== 200) return logger.error(`獲取圖片錯誤，網址：${url}`);
 		const savePath = this.#getImageSavePath(index, response, url);
 		await Bun.write(savePath.toString(), await response.arrayBuffer());
 	}
@@ -84,16 +84,16 @@ export default class Downloader {
 	}
 
 	async start() {
-		logger.info(`Start download ${this.#aid}.`);
+		logger.info(`開始下載 ${this.#aid}.`);
 		const info = await this.#getInfo();
-		logger.info(`Title：${info.title}`);
+		logger.info(`標題：${info.title}`);
 		while (info.title.length > 96) info.title = (await input({ message: '書名過長，請輸入替代名稱：', required: true })).replaceAll(/\/|\.\./gi, '');
 		this.#bookDirPath = paths.books.join(info.title);
 		await this.#bookDirPath.mkdirs();
 		const allImagePageUrls = await this.#getAllImagePageUrls(info.pageCount);
-		logger.info(`Images count ${allImagePageUrls.length}.`);
+		logger.info(`圖片數：${allImagePageUrls.length}張`);
 		await this.#processAllImagePages(allImagePageUrls);
-		if (await this.#checkDownloadedImages(allImagePageUrls.length)) return logger.info(`Success download ${info.title}`);
-		logger.error(`${info.title} images count not correct!`);
+		if (await this.#checkDownloadedImages(allImagePageUrls.length)) return logger.info(`下載完成`);
+		logger.error(`已下載圖片數與總圖片數不一致`);
 	}
 }
