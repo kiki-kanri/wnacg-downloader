@@ -4,7 +4,7 @@
   "author": "kiki-kanri",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kiki-kanri/wnacg-nh-downloader.git"
+    "url": "git+https://github.com/kiki-kanri/wnacg-downloader.git"
   },
   "type": "module",
   "scripts": {
