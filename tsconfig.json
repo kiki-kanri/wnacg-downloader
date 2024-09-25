@@ -1,0 +1,9 @@
+{
+  "extends": "@kikiutils/tsconfigs/bun.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["./src"]
+}
