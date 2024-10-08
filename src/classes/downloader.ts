@@ -1,7 +1,6 @@
 import { input } from '@inquirer/prompts';
 import Path from '@kikiutils/classes/path';
 import logger from '@kikiutils/node/consola';
-import { sleep } from 'bun';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
 
@@ -35,7 +34,7 @@ export default class Downloader {
 	}
 
 	async #downloadImagePage(index: string, pageUrl: string) {
-		while (this.#downloadingCount > 30) await sleep(50);
+		while (this.#downloadingCount > 30) await Bun.sleep(50);
 		this.#downloadingCount++;
 		const url = `https://wnacg.com${pageUrl}`;
 		const response = await fetchGet(url);
