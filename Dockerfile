@@ -16,8 +16,7 @@ ENV NODE_ENV=production
 ## Copy files and build
 COPY ./src ./src
 COPY ./tsconfig.json ./
-RUN bun run type-check
-RUN bun run compile
+RUN bun run compile:optimization
 
 # Runtime stage
 FROM oven/bun:alpine
