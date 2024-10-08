@@ -2,8 +2,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production bun --env-file=./.env.production.local build ./src/index.ts --minify --outdir ./dist --target bun",
-    "compile": "NODE_ENV=production bun --env-file=./.env.production.local build ./src/index.ts --compile --minify --outfile ./dist/index --target bun",
+    "build": "NODE_ENV=production bun --env-file=./.env.production.local build ./src/index.ts --bytecode --minify --outdir ./dist --target bun",
+    "compile": "NODE_ENV=production bun --env-file=./.env.production.local build ./src/index.ts --bytecode --compile --minify --outfile ./dist/index --target bun",
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "type-check": "tsc"
   },
