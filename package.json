@@ -4,9 +4,9 @@
   "scripts": {
     "build": "bun run build:exec --bytecode --outdir=./dist ./src/index.ts",
     "build:exec": "NODE_ENV=production bun --env-file=./.env.production.local build --minify --target bun",
-    "build:optimization": "./build.sh --clean",
+    "build:optimization": "./build-optimization.sh --clean",
     "compile": "bun run build:exec --bytecode --compile --outfile ./dist/index ./src/index.ts",
-    "compile:optimization": "./build.sh --clean --compile",
+    "compile:optimization": "./build-optimization.sh --clean --compile",
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
     "type-check": "tsc"
   },
