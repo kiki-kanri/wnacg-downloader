@@ -14,6 +14,7 @@ RUN bun i --frozen-lockfile
 ENV NODE_ENV=production
 
 ## Copy files and build
+COPY ./build.sh ./
 COPY ./src ./src
 COPY ./tsconfig.json ./
 RUN bun run compile:optimization
