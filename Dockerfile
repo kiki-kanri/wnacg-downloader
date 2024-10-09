@@ -7,17 +7,17 @@ ENV NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
 WORKDIR /app
 
 ## Install packages
-COPY ./.npmrc ./bun.lockb ./package.json ./
+COPY ./bun.lockb ./package.json ./
 RUN bun i --frozen-lockfile
 
 ## Set production env
 ENV NODE_ENV=production
 
 ## Copy files and build
-COPY ./build.sh ./
+COPY ./build-optimization.sh ./
 COPY ./src ./src
 COPY ./tsconfig.json ./
-RUN bun run compile:optimization
+RUN ./build-optimization.sh --compile
 
 # Runtime stage
 FROM oven/bun:alpine
