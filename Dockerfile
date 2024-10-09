@@ -14,10 +14,10 @@ RUN bun i --frozen-lockfile
 ENV NODE_ENV=production
 
 ## Copy files and build
-COPY ./build-optimization.sh ./
 COPY ./src ./src
 COPY ./tsconfig.json ./
-RUN ./build-optimization.sh --compile
+RUN bun run type-check
+RUN bun run compile
 
 # Runtime stage
 FROM oven/bun:alpine
