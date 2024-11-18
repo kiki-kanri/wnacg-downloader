@@ -12,11 +12,11 @@ importers:
         specifier: ^1.3.2
         version: 1.3.2
       '@kikiutils/tsconfigs':
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: ^3.0.2
+        version: 3.0.2
       '@types/bun':
-        specifier: ^1.1.11
-        version: 1.1.11
+        specifier: ^1.1.13
+        version: 1.1.13
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -35,17 +35,17 @@ packages:
   '@kikiutils/prettierrc@1.3.2':
     resolution: {integrity: sha512-swvPqAf5VmXAKjngFywFw+ibsnwrkP1WJ9egH9ZAjjPNxZrBhVKCmk/X4a1baKUXXgSB3aMmsx0InqP3+pV2qQ==}
 
-  '@kikiutils/tsconfigs@3.0.1':
-    resolution: {integrity: sha512-euNfmx2S5chW92H7CMUWANerj7feZXs1ZMuNs4hZiOLxn/XSq46g1DcWEY7QnpbesURYQtPAQDGtkkzJzcLQtg==}
+  '@kikiutils/tsconfigs@3.0.2':
+    resolution: {integrity: sha512-SlmtTi4svk85ZkssXYscLBgTRAtWA48szJ3E3we9fk89j6wrWPH3Il2FkQTyoQK7VSeFVJ1KO1jvlcaUmu6n8Q==}
 
-  '@types/bun@1.1.11':
-    resolution: {integrity: sha512-0N7D/H/8sbf9JMkaG5F3+I/cB4TlhKTkO9EskEWP8XDr8aVcDe4EywSnU4cnyZy6tar1dq70NeFNkqMEUigthw==}
+  '@types/bun@1.1.13':
+    resolution: {integrity: sha512-KmQxSBgVWCl6RSuerlLGZlIWfdxkKqat0nxN61+qu4y1KDn0Ll3j7v1Pl8GnaL3a/U6GGWVTJh75ap62kR1E8Q==}
 
   '@types/node@20.12.14':
     resolution: {integrity: sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==}
 
-  '@types/ws@8.5.12':
-    resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
+  '@types/ws@8.5.13':
+    resolution: {integrity: sha512-osM/gWBTPKgHV8XkTunnegTRIsvF6owmf5w+JtAfOw472dptdm0dlGv4xCt6GwQRcC2XVOvvRE/0bAoQcL2QkA==}
 
   browser-or-node@2.1.1:
     resolution: {integrity: sha512-8CVjaLJGuSKMVTxJ2DpBl5XnlNDiT4cQFeuCJJrvJmts9YrTZDizTX7PjC2s6W4x+MBGZeEY6dGMrF04/6Hgqg==}
@@ -53,8 +53,8 @@ packages:
   browser-or-node@3.0.0:
     resolution: {integrity: sha512-iczIdVJzGEYhP5DqQxYM9Hh7Ztpqqi+CXZpSmX8ALFs9ecXkQIeqRyM6TfxEfMVpwhl3dSuDvxdzzo9sUOIVBQ==}
 
-  bun-types@1.1.30:
-    resolution: {integrity: sha512-mGh7NLisOXskBU62DxLS+/nwmLlCYHYAkCzdo4DZ9+fzrpP41hAdOqaN4DO6tQfenHb4pYb0/shw29k4/6I2yQ==}
+  bun-types@1.1.34:
+    resolution: {integrity: sha512-br5QygTEL/TwB4uQOb96Ky22j4Gq2WxWH/8Oqv20fk5HagwKXo/akB+LiYgSfzexCt6kkcUaVm+bKiPl71xPvw==}
 
   expect-type@0.15.0:
     resolution: {integrity: sha512-yWnriYB4e8G54M5/fAFj7rCIBiKs1HAACaY13kCz6Ku0dezjS9aMcfcdVK2X8Tv2tEV1BPz/wKfQ7WA4S/d8aA==}
@@ -76,8 +76,8 @@ packages:
     resolution: {integrity: sha512-ccfwvjGuNU14cSSXLlmPRiqEgMfA7w3J2TViO79zMnzXGvE6FJ0dxnhIQGwe5r/vwySOJ4sqZksexo9wyAlA8g==}
     deprecated: Use @augment-vir/assert instead.
 
-  type-fest@4.26.1:
-    resolution: {integrity: sha512-yOGpmOAL7CkKe/91I5O3gPICmJNLJ1G4zFYVAsRHg7M64biSnPtRj0WNQt++bRkjYOqjWXrhnUw1utzmVErAdg==}
+  type-fest@4.27.0:
+    resolution: {integrity: sha512-3IMSWgP7C5KSQqmo1wjhKrwsvXAtF33jO3QY+Uy++ia7hqvgSK6iXbbg5PbDBc1P2ZbNEDgejOrN4YooXvhwCw==}
     engines: {node: '>=16'}
 
   typescript@5.6.3:
@@ -94,36 +94,36 @@ snapshots:
     dependencies:
       browser-or-node: 2.1.1
       run-time-assertions: 1.5.2
-      type-fest: 4.26.1
+      type-fest: 4.27.0
 
   '@augment-vir/common@28.2.4':
     dependencies:
       browser-or-node: 3.0.0
       run-time-assertions: 1.5.2
-      type-fest: 4.26.1
+      type-fest: 4.27.0
 
   '@augment-vir/common@29.3.0':
     dependencies:
       browser-or-node: 3.0.0
       run-time-assertions: 1.5.2
-      type-fest: 4.26.1
+      type-fest: 4.27.0
 
   '@kikiutils/prettierrc@1.3.2':
     dependencies:
       prettier: 3.3.3
       prettier-plugin-multiline-arrays: 3.0.6(prettier@3.3.3)
 
-  '@kikiutils/tsconfigs@3.0.1': {}
+  '@kikiutils/tsconfigs@3.0.2': {}
 
-  '@types/bun@1.1.11':
+  '@types/bun@1.1.13':
     dependencies:
-      bun-types: 1.1.30
+      bun-types: 1.1.34
 
   '@types/node@20.12.14':
     dependencies:
       undici-types: 5.26.5
 
-  '@types/ws@8.5.12':
+  '@types/ws@8.5.13':
     dependencies:
       '@types/node': 20.12.14
 
@@ -131,10 +131,10 @@ snapshots:
 
   browser-or-node@3.0.0: {}
 
-  bun-types@1.1.30:
+  bun-types@1.1.34:
     dependencies:
       '@types/node': 20.12.14
-      '@types/ws': 8.5.12
+      '@types/ws': 8.5.13
 
   expect-type@0.15.0: {}
 
@@ -154,9 +154,9 @@ snapshots:
     dependencies:
       '@augment-vir/common': 29.3.0
       expect-type: 0.15.0
-      type-fest: 4.26.1
+      type-fest: 4.27.0
 
-  type-fest@4.26.1: {}
+  type-fest@4.27.0: {}
 
   typescript@5.6.3: {}
 
