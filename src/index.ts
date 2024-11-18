@@ -19,7 +19,6 @@ logger.level = 3;
 			}
 
 			await Bun.sleep(500);
-			console.log();
 		}
 	}
 })();

@@ -1,5 +1,5 @@
 import { input } from '@inquirer/prompts';
-import Path from '@kikiutils/classes/path';
+import type Path from '@kikiutils/classes/path';
 import logger from '@kikiutils/node/consola';
 import { load } from 'cheerio';
 import { Presets, SingleBar } from 'cli-progress';
@@ -72,7 +72,7 @@ export class Downloader {
 		if (response.status > 400) throw new Error('Get page Error.');
 		const root = load(await response.text(), {}, true);
 		const linkEls = root('div.pic_box.tb a');
-		return linkEls.map((_, linkEl) => linkEl.attribs['href']).toArray();
+		return linkEls.map((_, linkEl) => linkEl.attribs.href).toArray();
 	}
 
 	async #processAllImagePages(allImagePageUrls: string[]) {
