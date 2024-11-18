@@ -1,6 +1,6 @@
 {
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "bun run build:exec --outdir=./dist ./src/index.ts",
     "build:exec": "NODE_ENV=production bun --env-file=./.env.production.local build --bytecode --minify --target bun",
