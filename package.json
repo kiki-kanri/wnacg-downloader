@@ -6,6 +6,8 @@
     "build:exec": "NODE_ENV=production bun --env-file=./.env.production.local build --bytecode --minify --target bun",
     "compile": "bun run build:exec --compile --outfile ./dist/index ./src/index.ts",
     "dev": "NODE_ENV=development bun --env-file=./.env.development.local --watch run ./src/index.ts",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "type-check": "tsc"
   },
   "devDependencies": {
