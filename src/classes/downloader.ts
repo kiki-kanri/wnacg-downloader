@@ -87,6 +87,7 @@ export class Downloader {
 		const info = await this.#getInfo();
 		logger.info(`標題：${info.title}`);
 		while (info.title.length > 96) info.title = (await input({ message: '書名過長，請輸入替代名稱：', required: true })).replaceAll(/\/|\.\./g, '');
+		info.title = info.title.replace(/[.\s]+$/, '');
 		this.#bookDirPath = paths.books.join(info.title);
 		await this.#bookDirPath.mkdirs();
 		const allImagePageUrls = await this.#getAllImagePageUrls(info.pageCount);
