@@ -78,7 +78,7 @@ export class Downloader {
 	async #processAllImagePages(allImagePageUrls: string[]) {
 		const numberOfDigits = allImagePageUrls.length.toString().length;
 		progressBar.start(allImagePageUrls.length, 0);
-		await Promise.all(allImagePageUrls.map(async (url, index) => this.#downloadImagePage(`${index + 1}`.padStart(numberOfDigits, '0'), url)));
+		await Promise.all(allImagePageUrls.map((url, index) => this.#downloadImagePage(`${index + 1}`.padStart(numberOfDigits, '0'), url)));
 		progressBar.stop();
 	}
 

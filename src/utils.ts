@@ -15,4 +15,4 @@ const fetchHeaders = {
 	'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
 };
 
-export const fetchGet = async (url: string, referrer?: string) => await fetch(url, { headers: fetchHeaders, method: 'GET', referrer });
+export const fetchGet = (url: string, referrer?: string) => fetch(url, { headers: fetchHeaders, method: 'GET', referrer });
