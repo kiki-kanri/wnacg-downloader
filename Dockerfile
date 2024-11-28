@@ -26,9 +26,9 @@ FROM oven/bun:alpine
 ENV NODE_ENV=production
 WORKDIR /app
 
-## Set timezone and upgrade packages
+## Upgrade packages and set timezone
 RUN apk update && apk upgrade --no-cache
-RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+# RUN apk add -lu --no-cache tzdata && ln -s /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
 ## Copy files and libraries
 COPY --from=build-stage /app/dist/index ./
