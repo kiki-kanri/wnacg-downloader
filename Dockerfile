@@ -3,6 +3,7 @@ FROM oven/bun:alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
+ENV NODE_ENV=production
 ENV NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
 WORKDIR /app
 
@@ -10,12 +11,9 @@ WORKDIR /app
 COPY ./bun.lockb ./package.json ./
 RUN bun i --frozen-lockfile
 
-## Set production env
-ENV NODE_ENV=production
-
 ## Copy files
 COPY ./src ./src
-COPY ./eslint.config.mjs ./tsconfig.json ./
+COPY ./.env.production.local ./eslint.config.mjs ./tsconfig.json ./
 
 ## Build
 RUN bun run lint
