@@ -8,8 +8,7 @@ logger.level = 3;
 (async () => {
     while (true) {
         const aidsOrURLsString = (await input({ message: '請輸入網址或aid(多個請用空格分隔)：', required: true })).trim();
-        const aidsOrURLs = aidsOrURLsString.split(' ');
-        for (let aidOrURL of aidsOrURLs) {
+        for (let aidOrURL of aidsOrURLsString.split(/ +/g)) {
             aidOrURL = aidOrURL.trim();
             if (!aidOrURL) continue;
             try {
