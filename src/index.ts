@@ -7,13 +7,13 @@ logger.level = 3;
 
 (async () => {
     while (true) {
-        const aidsOrUrlsString = (await input({ message: '請輸入網址或aid(多個請用空格分隔)：', required: true })).trim();
-        const aidsOrUrls = aidsOrUrlsString.split(' ');
-        for (let aidOrUrl of aidsOrUrls) {
-            aidOrUrl = aidOrUrl.trim();
-            if (!aidOrUrl) continue;
+        const aidsOrURLsString = (await input({ message: '請輸入網址或aid(多個請用空格分隔)：', required: true })).trim();
+        const aidsOrURLs = aidsOrURLsString.split(' ');
+        for (let aidOrURL of aidsOrURLs) {
+            aidOrURL = aidOrURL.trim();
+            if (!aidOrURL) continue;
             try {
-                await new Downloader(aidOrUrl).run();
+                await new Downloader(aidOrURL).run();
             } catch (error) {
                 logger.error(error);
             }

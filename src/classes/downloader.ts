@@ -14,9 +14,9 @@ export class Downloader {
     #bookDirPath!: Path;
     #downloadingCount: number = 0;
 
-    constructor(aidOrUrl: string) {
-        const aid = (+aidOrUrl).toString() === aidOrUrl ? aidOrUrl : aidOrUrl.match(/aid-(\d+)/)?.[1];
-        if (!aid) throw new Error(`錯誤的aid或網址：${aidOrUrl}`);
+    constructor(aidOrURL: string) {
+        const aid = (+aidOrURL).toString() === aidOrURL ? aidOrURL : aidOrURL.match(/aid-(\d+)/)?.[1];
+        if (!aid) throw new Error(`錯誤的aid或網址：${aidOrURL}`);
         this.#aid = aid;
     }
 
@@ -25,29 +25,29 @@ export class Downloader {
         return images?.length === targetFilesCount;
     }
 
-    async #downloadImage(index: string, pageUrl: string, url: string) {
+    async #downloadImage(index: string, pageURL: string, url: string) {
         if (url.startsWith('//')) url = `https:${url}`;
-        const response = await fetchGet(url, pageUrl);
+        const response = await fetchGet(url, pageURL);
         if (response.status !== 200) return logger.error(`獲取圖片錯誤，網址：${url}`);
         const savePath = this.#getImageSavePath(index, response, url);
         await Bun.write(savePath.toString(), await response.arrayBuffer());
     }
 
-    async #downloadImagePage(index: string, pageUrl: string) {
+    async #downloadImagePage(index: string, pageURL: string) {
         while (this.#downloadingCount > 30) await Bun.sleep(50);
         this.#downloadingCount++;
-        const url = `https://wnacg.com${pageUrl}`;
+        const url = `https://wnacg.com${pageURL}`;
         const response = await fetchGet(url);
         const root = load(await response.text(), {}, true);
-        const imageUrl = root('#picarea').attr('src');
-        if (imageUrl) await this.#downloadImage(index, url, imageUrl);
+        const imageURL = root('#picarea').attr('src');
+        if (imageURL) await this.#downloadImage(index, url, imageURL);
         this.#downloadingCount--;
         progressBar.increment();
     }
 
-    async #getAllImagePageUrls(pageCount: number) {
+    async #getAllImagePageURLs(pageCount: number) {
         const promises = [];
-        for (let i = 1; i <= pageCount; i++) promises.push(this.#getIndexPageImagePageUrls(i));
+        for (let i = 1; i <= pageCount; i++) promises.push(this.#getIndexPageImagePageURLs(i));
         return (await Promise.all(promises)).flat();
     }
 
@@ -67,7 +67,7 @@ export class Downloader {
         return { pageCount: +(lastPageHrefEl?.text() || 1), title: titleEl.text().trim() };
     }
 
-    async #getIndexPageImagePageUrls(index: number) {
+    async #getIndexPageImagePageURLs(index: number) {
         const response = await fetchGet(`https://wnacg.com/photos-index-page-${index}-aid-${this.#aid}.html`);
         if (response.status > 400) throw new Error('Get page Error.');
         const root = load(await response.text(), {}, true);
@@ -75,10 +75,10 @@ export class Downloader {
         return linkEls.map((_, linkEl) => linkEl.attribs.href).toArray();
     }
 
-    async #processAllImagePages(allImagePageUrls: string[]) {
-        const numberOfDigits = allImagePageUrls.length.toString().length;
-        progressBar.start(allImagePageUrls.length, 0);
-        await Promise.all(allImagePageUrls.map((url, index) => this.#downloadImagePage(`${index + 1}`.padStart(numberOfDigits, '0'), url)));
+    async #processAllImagePages(allImagePageURLs: string[]) {
+        const numberOfDigits = allImagePageURLs.length.toString().length;
+        progressBar.start(allImagePageURLs.length, 0);
+        await Promise.all(allImagePageURLs.map((url, index) => this.#downloadImagePage(`${index + 1}`.padStart(numberOfDigits, '0'), url)));
         progressBar.stop();
     }
 
@@ -90,10 +90,10 @@ export class Downloader {
         info.title = info.title.replace(/[.\s]+$/, '');
         this.#bookDirPath = paths.books.join(info.title);
         await this.#bookDirPath.mkdirs();
-        const allImagePageUrls = await this.#getAllImagePageUrls(info.pageCount);
-        logger.info(`圖片數：${allImagePageUrls.length}張`);
-        await this.#processAllImagePages(allImagePageUrls);
-        if (await this.#checkDownloadedImages(allImagePageUrls.length)) return logger.info(`下載完成`);
+        const allImagePageURLs = await this.#getAllImagePageURLs(info.pageCount);
+        logger.info(`圖片數：${allImagePageURLs.length}張`);
+        await this.#processAllImagePages(allImagePageURLs);
+        if (await this.#checkDownloadedImages(allImagePageURLs.length)) return logger.info(`下載完成`);
         logger.error(`已下載圖片數與總圖片數不一致`);
     }
 }
