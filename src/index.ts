@@ -4,10 +4,13 @@ import logger from '@kikiutils/node/consola';
 import { Downloader } from '@/classes/downloader';
 
 logger.level = 3;
-
 (async () => {
     while (true) {
-        const aidsOrURLsString = (await input({ message: '請輸入網址或aid(多個請用空格分隔)：', required: true })).trim();
+        const aidsOrURLsString = (await input({
+            message: '請輸入網址或aid(多個請用空格分隔)：',
+            required: true,
+        })).trim();
+
         for (let aidOrURL of aidsOrURLsString.split(/ +/g)) {
             aidOrURL = aidOrURL.trim();
             if (!aidOrURL) continue;

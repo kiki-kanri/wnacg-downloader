@@ -2,7 +2,10 @@ import { input } from '@inquirer/prompts';
 import type Path from '@kikiutils/classes/path';
 import logger from '@kikiutils/node/consola';
 import { load } from 'cheerio';
-import { Presets, SingleBar } from 'cli-progress';
+import {
+    Presets,
+    SingleBar,
+} from 'cli-progress';
 
 import paths from '@/constants/paths';
 import { fetchGet } from '@/utils';
@@ -21,8 +24,7 @@ export class Downloader {
     }
 
     async #checkDownloadedImages(targetFilesCount: number) {
-        const images = await this.#bookDirPath.readdir();
-        return images?.length === targetFilesCount;
+        return (await this.#bookDirPath.readdir())?.length === targetFilesCount;
     }
 
     async #downloadImage(index: string, pageURL: string, url: string) {
@@ -64,7 +66,10 @@ export class Downloader {
         const root = load(await response.text(), {}, true);
         const titleEl = root('h2');
         const lastPageHrefEl = root('div.f_left.paginator > a').last();
-        return { pageCount: +(lastPageHrefEl?.text() || 1), title: titleEl.text().trim() };
+        return {
+            pageCount: +(lastPageHrefEl?.text() || 1),
+            title: titleEl.text().trim(),
+        };
     }
 
     async #getIndexPageImagePageURLs(index: number) {
@@ -86,7 +91,13 @@ export class Downloader {
         logger.info(`開始下載 ${this.#aid}.`);
         const info = await this.#getInfo();
         logger.info(`標題：${info.title}`);
-        while (info.title.length > 96) info.title = (await input({ message: '書名過長，請輸入替代名稱：', required: true })).replaceAll(/\/|\.\./g, '');
+        while (info.title.length > 96) {
+            info.title = (await input({
+                message: '書名過長，請輸入替代名稱：',
+                required: true,
+            })).replaceAll(/\/|\.\./g, '');
+        }
+
         info.title = info.title.replace(/[.\s]+$/, '');
         this.#bookDirPath = paths.books.join(info.title);
         await this.#bookDirPath.mkdirs();
