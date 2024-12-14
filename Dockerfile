@@ -16,9 +16,7 @@ COPY ./src ./src
 COPY ./.env.production.local ./eslint.config.mjs ./tsconfig.json ./
 
 ## Build
-RUN bun run lint
-RUN bun run type-check
-RUN bun run build
+RUN bun run lint && bun run type-check && bun run build
 
 # Runtime stage
 FROM oven/bun:alpine
