@@ -3,3 +3,10 @@ name = "wnacg-downloader"
 edition = "2021"
 
 [dependencies]
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+overflow-checks = true
+panic = "unwind"
+strip = "symbols"
