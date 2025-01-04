@@ -1,0 +1,5 @@
+[package]
+name = "wnacg-downloader"
+edition = "2021"
+
+[dependencies]
