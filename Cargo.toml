@@ -3,6 +3,9 @@ name = "wnacg-downloader"
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.95"
+regex = "1.11.1"
+scraper = "0.22.0"
 tokio = { version = "1.42.0", features = ["full"] }
 
 [profile.release]
