@@ -6,7 +6,10 @@ edition = "2024"
 anyhow = "1.0.95"
 regex = "1.11.1"
 scraper = "0.22.0"
+time = { version = "0.3.37", features = ["formatting", "local-offset", "macros"] }
 tokio = { version = "1.43.0", features = ["full"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["time"] }
 
 [profile.release]
 codegen-units = 1
