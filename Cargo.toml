@@ -6,7 +6,7 @@ edition = "2024"
 anyhow = "1.0.95"
 regex = "1.11.1"
 scraper = "0.22.0"
-tokio = { version = "1.42.0", features = ["full"] }
+tokio = { version = "1.43.0", features = ["full"] }
 
 [profile.release]
 codegen-units = 1
