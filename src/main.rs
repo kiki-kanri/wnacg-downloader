@@ -1,8 +1,13 @@
 use anyhow::Result;
+use regex::Regex;
 use std::io::{self, Write};
 use time::UtcOffset;
 use time::macros::format_description;
 use tracing_subscriber::fmt::time::OffsetTime;
+
+mod downloader;
+
+use downloader::Downloader;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -18,6 +23,17 @@ async fn main() -> Result<()> {
         let aids_or_urls_string = aids_or_urls_string.trim();
         if aids_or_urls_string.is_empty() {
             return Ok(());
+        }
+
+        let aid_or_urls = Regex::new(r"\s+")?.split(aids_or_urls_string).collect::<Vec<_>>();
+        for aid_or_url in aid_or_urls {
+            let downloader = match Downloader::new(aid_or_url) {
+                Ok(downloader) => downloader,
+                Err(err) => {
+                    tracing::error!("{err}");
+                    continue;
+                }
+            };
         }
     }
 }
