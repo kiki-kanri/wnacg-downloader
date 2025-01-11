@@ -4,8 +4,11 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.95"
+openssl-sys = { version = "0.9.104", features = ["vendored"] }
 regex = "1.11.1"
+reqwest = { version = "0.12.12", features = ["brotli", "deflate", "gzip", "http3", "rustls-tls", "zstd"] }
 scraper = "0.22.0"
+tikv-jemallocator = { version = "0.6.0", features = ["background_threads_runtime_support", "background_threads"] }
 time = { version = "0.3.37", features = ["formatting", "local-offset", "macros"] }
 tokio = { version = "1.43.0", features = ["full"] }
 tracing = "0.1.41"

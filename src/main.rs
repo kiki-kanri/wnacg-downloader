@@ -1,6 +1,7 @@
 use anyhow::Result;
 use regex::Regex;
 use std::io::{self, Write};
+use tikv_jemallocator::Jemalloc;
 use time::UtcOffset;
 use time::macros::format_description;
 use tracing_subscriber::fmt::time::OffsetTime;
@@ -8,6 +9,9 @@ use tracing_subscriber::fmt::time::OffsetTime;
 mod downloader;
 
 use downloader::Downloader;
+
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
 
 #[tokio::main]
 async fn main() -> Result<()> {
